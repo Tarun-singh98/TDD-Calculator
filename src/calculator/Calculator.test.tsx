@@ -31,3 +31,9 @@ test("should handle different delimiters between numbers", () => {
   const check = screen.getByText("3");
   expect(check).toBeVisible();
 });
+
+test("should throw an error for negative numbers", () => {
+  render(<Calculator inputString={"-1,2,-3"} />);
+  const check = screen.getByText("negative numbers not allowed: -1, -3");
+  expect(check).toBeVisible();
+});
