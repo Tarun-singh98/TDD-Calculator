@@ -11,9 +11,30 @@ const Calculator = ({ inputString }: { inputString: string }) => {
 
     // To handle the different delimiters between numbers
     if (numbers.startsWith("//")) {
-      const delimiterEndIndex = numbers.indexOf("\n");
-      delimiter = new RegExp(numbers.slice(2, delimiterEndIndex));
-      numbers = numbers.slice(delimiterEndIndex + 1);
+      // To handle the multiple delimiters
+      if (numbers.startsWith("//[")) {
+        const delimiters: any = [];
+        let delimiterEndIndex: any = 2;
+        while (numbers[delimiterEndIndex] === "[") {
+          delimiterEndIndex++;
+          const start: any = delimiterEndIndex;
+          delimiterEndIndex = numbers.indexOf("]", start);
+          delimiters.push(numbers.slice(start, delimiterEndIndex));
+          delimiterEndIndex++;
+        }
+        delimiter = new RegExp(
+          delimiters
+            .map((delimiter: any) =>
+              delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+            )
+            .join("|")
+        );
+        numbers = numbers.slice(delimiterEndIndex + 1);
+      } else {
+        const delimiterEndIndex = numbers.indexOf("\n");
+        delimiter = new RegExp(numbers.slice(2, delimiterEndIndex));
+        numbers = numbers.slice(delimiterEndIndex + 1);
+      }
     }
 
     const newNumber = numbers.split(delimiter);
