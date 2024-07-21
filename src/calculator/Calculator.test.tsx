@@ -26,4 +26,8 @@ test("should handle new lines between numbers", () => {
   expect(check).toBeVisible();
 });
 
-
+test("should handle different delimiters between numbers", () => {
+  render(<Calculator inputString={"//;\n1;2"} />);
+  const check = screen.getByText("3");
+  expect(check).toBeVisible();
+});
