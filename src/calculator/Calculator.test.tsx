@@ -19,3 +19,11 @@ test("if 2 numbers are given than return the sum", () => {
   const check = screen.queryByText("6");
   expect(check).toBeVisible();
 });
+
+test("should handle new lines between numbers", () => {
+  render(<Calculator inputString={"1\n2,3"} />);
+  const check = screen.getByText("6");
+  expect(check).toBeVisible();
+});
+
+
