@@ -43,3 +43,9 @@ test("should ignore numbers bigger than 1000", () => {
   const check = screen.getByText("2");
   expect(check).toBeVisible();
 });
+
+test("should handle delimiters of any length", () => {
+  render(<Calculator inputString={"//[******]\n1*****2****3"} />);
+  const check = screen.getByText("6");
+  expect(check).toBeVisible();
+});
