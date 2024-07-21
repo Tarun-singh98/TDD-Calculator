@@ -11,6 +11,7 @@ const Calculator = ({ inputString }: { inputString: string }) => {
 
     // To handle the different delimiters between numbers
     if (numbers.startsWith("//")) {
+      
       // To handle the multiple delimiters
       if (numbers.startsWith("//[")) {
         const delimiters: any = [];
