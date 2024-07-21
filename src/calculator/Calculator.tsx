@@ -27,6 +27,8 @@ const Calculator = ({ inputString }: { inputString: string }) => {
 
     let sum = 0;
     for (let i = 0; i < newNumber.length; i++) {
+      // To handle the number greater than 1000
+      if (parseInt(newNumber[i], 10) > 1000) continue;
       sum += parseInt(newNumber[i], 10);
     }
     return sum;
