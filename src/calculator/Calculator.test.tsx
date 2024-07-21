@@ -37,3 +37,9 @@ test("should throw an error for negative numbers", () => {
   const check = screen.getByText("negative numbers not allowed: -1, -3");
   expect(check).toBeVisible();
 });
+
+test("should ignore numbers bigger than 1000", () => {
+  render(<Calculator inputString={"2,1001"} />);
+  const check = screen.getByText("2");
+  expect(check).toBeVisible();
+});
